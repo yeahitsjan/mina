@@ -7,13 +7,15 @@ TEMPLATE = app
 SOURCES += source/application.cpp \
             source/main.cpp \
             source/main_window.cpp \
+            source/preferences_dialog.cpp \
             source/node_graph.cpp \
             source/abstract_node.cpp \
             source/bnode/bitmap_bnode.cpp \
-            source/inode/read_inode.cpp
+            source/inode/read_inode.cpp \
 
 HEADERS += source/application.h \
             source/main_window.h \
+            source/preferences_dialog.h \
             source/node_graph.h \
             source/abstract_node.h \
             source/bnode/bitmap_bnode.h \

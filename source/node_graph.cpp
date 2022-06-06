@@ -85,6 +85,11 @@ void NodeGraphView::contextMenuEvent(QContextMenuEvent *event) {
     m_nodesMenu->exec(event->globalPos());
 }
 
+void NodeGraphView::onGraphReconfigured(bool _aa, bool _glAccel) {
+    this->setAA(_aa);
+    this->setGlAcceleration(_glAccel);
+}
+
 void NodeGraphView::glAcceleration(bool en) {
     if (!m_glViewport)
         m_glViewport = new QGLWidget(QGLFormat(QGL::SampleBuffers));

@@ -18,6 +18,7 @@
 #include <QTabWidget>
 #include <QStatusBar>
 
+#include "preferences_dialog.h"
 #include "node_graph.h"
 
 namespace mina {
@@ -38,15 +39,23 @@ protected:
     QPointer<QMenuBar> m_menuBar;
     QPointer<QStatusBar> m_statusBar;
 
+    QPointer<PreferencesDialog> m_preferencesDlg;
+
 private:
     QMenu *m_fileMenu;
+    
     QMenu *m_editMenu;
+    QAction *m_edit_preferencesAction;
+    
     QMenu *m_viewMenu;
 
     QMenu *m_helpMenu;
     QAction *m_help_aboutAction;
 
     QList<QMenu*> m_lMenus;
+
+public slots:
+    void on_editPreferencesAction_clicked();
 };
 
 } // namespace

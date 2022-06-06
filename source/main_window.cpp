@@ -24,7 +24,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     this->addToolBar(Qt::TopToolBarArea, m_docBar);
 
     m_lMenus.append( m_fileMenu = m_menuBar->addMenu("File") );
+
     m_lMenus.append( m_editMenu = m_menuBar->addMenu("Edit") );
+    m_edit_preferencesAction = new QAction("Preferences", m_editMenu);
+    connect(m_edit_preferencesAction, &QAction::triggered, this, &MainWindow::on_editPreferencesAction_clicked);
+    m_editMenu->addAction(m_edit_preferencesAction);
+    
     m_lMenus.append( m_viewMenu = m_menuBar->addMenu("View") );
 
     m_lMenus.append( m_helpMenu = m_menuBar->addMenu("Help") );
@@ -43,7 +48,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     m_tabWidget->setTabsClosable(true);
     this->setCentralWidget(m_tabWidget);
 
-    m_tabWidget->addTab(new NodeGraphView, "Node Graph 1");
+    NodeGraphView *_testA = new NodeGraphView;
+    // TODO: force both, related to implementation in main_window.cpp:on_editPreferencesAction_clicked
+    MApp->ngConfigureAA(true);
+    MApp->ngConfigureGLAcceleration(true);
+    _testA->setAA(true);
+    _testA->setGlAcceleration(true);
+    m_tabWidget->addTab(_testA, "Node Graph 1");
 
     if (!m_statusBar)
         m_statusBar = new QStatusBar;
@@ -58,6 +69,14 @@ MainWindow::~MainWindow() {
 void MainWindow::showStatusBarMsg(const QString &_msg, int _lengthInSecs) {
     if (m_statusBar)
         m_statusBar->showMessage(_msg, _lengthInSecs * 1000);
+}
+
+void MainWindow::on_editPreferencesAction_clicked() {
+    if (!m_preferencesDlg)
+        m_preferencesDlg = new PreferencesDialog;
+    // TODO: custom tab widget? get current tab's NodeGraph and call onGraphReconfigured
+    //connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured)
+    m_preferencesDlg->exec();
 }
 
 } // namespace

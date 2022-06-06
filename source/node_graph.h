@@ -69,6 +69,7 @@ signals:
     void aaModeChanged(bool en);
 
 public slots:
+    void onGraphReconfigured(bool _aa, bool _glAccel);
     void glAcceleration(bool en);
     void aaMode(bool en);
     void nodeReadyForDisplay(AbstractNode *_node); // fired from AbstractNode::readyForDisplay

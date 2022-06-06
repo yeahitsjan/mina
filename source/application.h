@@ -50,10 +50,17 @@ public:
     MinaApp(int &argc, char **argv);
     ~MinaApp();
 
-    QFont platformFont(int pxSz);
+    QFont platformFont(int _pxSz);
+    QString INIvalueFromKey(const QString &_part, const QString &_key);
 
     // Returns informations about the graphics device in the current session.
     SysGpuInfo currentGpuInfo();
+
+    void ngConfigureAA(bool c);
+    bool ngConfiguredAA();
+
+    void ngConfigureGLAcceleration(bool c);
+    bool ngConfiguredGLAcceleration();
 
 protected:
     SysGpuInfo m_gpuInfo;
@@ -61,7 +68,10 @@ protected:
     bool installApplicationFont();
 
 private:
-    bool fontInstalled = false;
+    bool m_fontInstalled = false;
+
+    bool m_ngAA;
+    bool m_ngGLAcceleration;
 };
 
 extern MinaApp *MApp;
