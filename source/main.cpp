@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     p.setColor(QPalette::ButtonText, QColor(198, 198, 198));
     p.setColor(QPalette::Link, QColor(235, 135, 0));
     // ---
-    p.setColor(QPalette::Highlight, QColor(20, 135, 0));
+    p.setColor(QPalette::Highlight, QColor(230, 8, 70));
     mApp.setPalette(p);
 
     mApp.setFont(mApp.platformFont(11));

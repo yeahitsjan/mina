@@ -13,7 +13,8 @@ namespace mina {
 
 PreferencesDialog::PreferencesDialog(QWidget *parent) : QDialog(parent) {
     this->setWindowTitle("Preferences");
-    this->resize(QSize(1024, 720)); // always the initial size
+    this->resize(QSize(960, 720)); // always the initial size
+    this->setMinimumSize(QSize(640, 480));
     this->setLayout( this->createUi() );
 }
 
@@ -66,6 +67,7 @@ QWidget* PreferencesDialog::createTabNodeGraph() {
     _pageLayout->setMargin(16);
 
     QLabel *_aaDescrLbl = new QLabel(MApp->INIvalueFromKey("preferences_dlg", "ng_configure_aa"), m_pageNodeGraph);
+    _aaDescrLbl->setWordWrap(true);
     m_ng_aaBox = new QCheckBox("Enable AA", m_pageNodeGraph);
     _pageLayout->addWidget(_aaDescrLbl);
     _pageLayout->addWidget(m_ng_aaBox);
@@ -74,6 +76,7 @@ QWidget* PreferencesDialog::createTabNodeGraph() {
     }
 
     QLabel *_glDescrLbl = new QLabel(MApp->INIvalueFromKey("preferences_dlg", "ng_configure_gl"), m_pageNodeGraph);
+    _glDescrLbl->setWordWrap(true);
     m_ng_glAccelBox = new QCheckBox("Enable GL acceleration", m_pageNodeGraph);
     _pageLayout->addWidget(_glDescrLbl);
     _pageLayout->addWidget(m_ng_glAccelBox);
