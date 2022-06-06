@@ -22,3 +22,6 @@ HEADERS += source/application.h \
 ## Submodules
 include(modules/phantomstyle/src/phantom/phantom.pri)
 include(modules/easyloggingpp/easyloggingpp.pri)
+
+RESOURCES += \
+    resources.qrc

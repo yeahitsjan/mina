@@ -57,6 +57,11 @@ public:
 
 protected:
     SysGpuInfo m_gpuInfo;
+    
+    bool installApplicationFont();
+
+private:
+    bool fontInstalled = false;
 };
 
 extern MinaApp *MApp;
