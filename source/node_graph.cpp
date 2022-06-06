@@ -4,6 +4,7 @@
 
 #include "node_graph.h"
 #include "easylogging++.h"
+#include "application.h"
 
 #include <QGraphicsScene>
 
@@ -97,9 +98,11 @@ void NodeGraphView::glAcceleration(bool en) {
     if (en) {
         this->setViewport(m_glViewport);
         LOG(INFO) << "node_graph: Enabled GL acceleration in current session";
+        MApp->ngConfigureGLAcceleration(true);
     } else {
         this->setViewport(new QWidget);
         LOG(INFO) << "node_graph: Disabled GL acceleration in current session";
+        MApp->ngConfigureGLAcceleration(false);
     }
 }
 
@@ -107,9 +110,11 @@ void NodeGraphView::aaMode(bool en) {
     if (en) {
         this->setRenderHint(QPainter::Antialiasing, true);
         LOG(INFO) << "node_graph: Enabled anti-aliasing in current session";
+        MApp->ngConfigureAA(true);
     } else {
         this->setRenderHint(QPainter::Antialiasing, false);
         LOG(INFO) << "node_graph: Disabled anti-aliasing in current session";
+        MApp->ngConfigureAA(false);
     }
 }
 

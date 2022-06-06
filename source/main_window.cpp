@@ -43,18 +43,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     this->setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::North);
 
     if (!m_tabWidget)
-        m_tabWidget = new QTabWidget;
-    m_tabWidget->setMovable(true);
-    m_tabWidget->setTabsClosable(true);
+        m_tabWidget = new CustomTabWidget;
     this->setCentralWidget(m_tabWidget);
 
-    NodeGraphView *_testA = new NodeGraphView;
-    // TODO: force both, related to implementation in main_window.cpp:on_editPreferencesAction_clicked
-    MApp->ngConfigureAA(true);
-    MApp->ngConfigureGLAcceleration(true);
-    _testA->setAA(true);
-    _testA->setGlAcceleration(true);
-    m_tabWidget->addTab(_testA, "Node Graph 1");
+    m_tabWidget->addDocument();
+    m_tabWidget->addDocument();
+    m_tabWidget->addDocument();
 
     if (!m_statusBar)
         m_statusBar = new QStatusBar;
@@ -73,9 +67,8 @@ void MainWindow::showStatusBarMsg(const QString &_msg, int _lengthInSecs) {
 
 void MainWindow::on_editPreferencesAction_clicked() {
     if (!m_preferencesDlg)
-        m_preferencesDlg = new PreferencesDialog;
-    // TODO: custom tab widget? get current tab's NodeGraph and call onGraphReconfigured
-    //connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured)
+        m_preferencesDlg = new PreferencesDialog(this);
+    connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured, m_tabWidget, &CustomTabWidget::refreshGraphConfig);
     m_preferencesDlg->exec();
 }
 

@@ -18,6 +18,10 @@ MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
     LOG(INFO) << "Copyright (c) 2022 Jan Kowalewicz -  Licensed under GNU GPLv3. See LICENSE or visit <https://www.gnu.org/licenses/>.";
     m_gpuInfo = gpuInfo();
 
+    // TODO: force for now
+    this->ngConfigureAA(false);
+    this->ngConfigureGLAcceleration(false);
+
     m_fontInstalled = this->installApplicationFont();    
 }
 

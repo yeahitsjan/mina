@@ -12,6 +12,7 @@
 namespace mina {
 
 PreferencesDialog::PreferencesDialog(QWidget *parent) : QDialog(parent) {
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowTitle("Preferences");
     this->resize(QSize(960, 720)); // always the initial size
     this->setMinimumSize(QSize(640, 480));
@@ -47,6 +48,7 @@ QVBoxLayout* PreferencesDialog::createUi() {
     _spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     m_okBtn = new QPushButton("OK", this);
+    connect(m_okBtn, &QPushButton::clicked, this, &PreferencesDialog::on_okBtn_clicked);
     m_cancelBtn = new QPushButton("Cancel", this);
 
     _btnLayout->addWidget(m_restoreBtn);

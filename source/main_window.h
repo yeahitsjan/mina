@@ -15,7 +15,7 @@
 #include <QMenu>
 
 #include <QToolBar>
-#include <QTabWidget>
+#include "custom_tab_widget.h"
 #include <QStatusBar>
 
 #include "preferences_dialog.h"
@@ -33,7 +33,7 @@ public:
 
     QPointer<QToolBar> m_toolsBar; // node-graph tools
     QPointer<QToolBar> m_docBar; // document-related tools
-    QPointer<QTabWidget> m_tabWidget;
+    QPointer<CustomTabWidget> m_tabWidget;
 
 protected:
     QPointer<QMenuBar> m_menuBar;
