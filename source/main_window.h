@@ -14,6 +14,8 @@
 #include <QMenuBar>
 #include <QMenu>
 
+#include "project_manager.h"
+
 #include <QToolBar>
 #include "custom_tab_widget.h"
 #include <QStatusBar>
@@ -34,6 +36,8 @@ public:
     QPointer<QToolBar> m_toolsBar; // node-graph tools
     QPointer<QToolBar> m_docBar; // document-related tools
     QPointer<CustomTabWidget> m_tabWidget;
+
+    QPointer<ProjectManager> m_projectManager;
 
 protected:
     QPointer<QMenuBar> m_menuBar;
@@ -56,6 +60,7 @@ private:
 
 public slots:
     void on_editPreferencesAction_clicked();
+    void on_activeProject_changed();
 };
 
 } // namespace

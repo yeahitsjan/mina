@@ -15,6 +15,7 @@ CustomTabWidget::CustomTabWidget(QWidget *parent) : QTabWidget(parent) {
 CustomTabWidget::~CustomTabWidget() {
 }
 
+// ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
 void CustomTabWidget::addDocument() {
     NodeGraphView *newNodeGraph = new NodeGraphView(this);
     newNodeGraph->setAA(MApp->ngConfiguredAA());
@@ -37,5 +38,6 @@ void CustomTabWidget::refreshGraphConfig(bool _aa, bool _glAccel) {
     }
 #endif
 }
+// ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
 
 } // namespace

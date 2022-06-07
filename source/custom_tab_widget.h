@@ -20,6 +20,7 @@ public:
     explicit CustomTabWidget(QWidget *parent = nullptr);
     ~CustomTabWidget();
 
+    // ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
     void addDocument(); // TODO: currently empty; adds a document (new project or whatever)
 
 protected:

@@ -12,7 +12,9 @@ SOURCES += source/application.cpp \
             source/node_graph.cpp \
             source/abstract_node.cpp \
             source/bnode/bitmap_bnode.cpp \
-            source/inode/read_inode.cpp
+            source/inode/read_inode.cpp \
+            source/project.cpp \
+            source/project_manager.cpp
 
 HEADERS += source/application.h \
             source/custom_tab_widget.h \
@@ -21,7 +23,9 @@ HEADERS += source/application.h \
             source/node_graph.h \
             source/abstract_node.h \
             source/bnode/bitmap_bnode.h \
-            source/inode/read_inode.h
+            source/inode/read_inode.h \
+            source/project.h \
+            source/project_manager.h
 
 ## Submodules
 include(modules/phantomstyle/src/phantom/phantom.pri)

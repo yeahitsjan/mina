@@ -46,13 +46,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
         m_tabWidget = new CustomTabWidget;
     this->setCentralWidget(m_tabWidget);
 
-    m_tabWidget->addDocument();
-    m_tabWidget->addDocument();
-    m_tabWidget->addDocument();
-
     if (!m_statusBar)
         m_statusBar = new QStatusBar;
     this->setStatusBar(m_statusBar);
+
+    if (!m_projectManager)
+        m_projectManager = new ProjectManager;
+    connect(m_projectManager, &ProjectManager::activeProjectChanged, this, &MainWindow::on_activeProject_changed);
+
+    if (m_projectManager->projectsInManager().isEmpty()) {
+        m_tabWidget->hide();
+    }
+
+    // test
+    Project *_proj1 = new Project;
+    _proj1->setProjectName("Autobahn Old tarmac");
+    m_projectManager->addProject(_proj1);
 
     this->showStatusBarMsg("OpenGL version " + MApp->currentGpuInfo().openGlVer + " on " + MApp->currentGpuInfo().devName, 10);
 }
@@ -70,6 +79,13 @@ void MainWindow::on_editPreferencesAction_clicked() {
         m_preferencesDlg = new PreferencesDialog(this);
     connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured, m_tabWidget, &CustomTabWidget::refreshGraphConfig);
     m_preferencesDlg->exec();
+}
+
+void MainWindow::on_activeProject_changed() {
+    // TODO
+    // add tab, instruct customtabwidget etc
+    if (!m_tabWidget->isVisible())
+        m_tabWidget->show();
 }
 
 } // namespace
