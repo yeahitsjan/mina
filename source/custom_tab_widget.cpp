@@ -15,29 +15,9 @@ CustomTabWidget::CustomTabWidget(QWidget *parent) : QTabWidget(parent) {
 CustomTabWidget::~CustomTabWidget() {
 }
 
-// ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
-void CustomTabWidget::addDocument() {
-    NodeGraphView *newNodeGraph = new NodeGraphView(this);
-    newNodeGraph->setAA(MApp->ngConfiguredAA());
-    newNodeGraph->setGlAcceleration(MApp->ngConfiguredGLAcceleration());
-    newNodeGraph->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    m_graphsInSession.append(newNodeGraph);
-    connect(this, &CustomTabWidget::graphConfigRefreshRequested, newNodeGraph, &NodeGraphView::onGraphReconfigured);
-    this->addTab(newNodeGraph, "Node Graph " + QString::number(m_graphsInSession.count()));
+void CustomTabWidget::addProjectTab(Project *_project) {
+    m_openProjects.append(_project);
+    this->addTab(_project->nodeGraph(), "Node Graph - [" + _project->projectName() + "]");
 }
-
-void CustomTabWidget::refreshGraphConfig(bool _aa, bool _glAccel) {
-    // TODO: a strange bug appear on refresh of graph =>
-    // anytime the GL viewport is changed all viewports except the currently displayed one
-    // are getting squared. Probably this has something to do with the NodeGraphView being the
-    // only widget inside the tab widgets page? Need to further look into this...
-    emit graphConfigRefreshRequested(_aa, _glAccel);
-#if 0
-    foreach (NodeGraphView *_graph, m_graphsInSession) {
-        _graph->onGraphReconfigured(_aa, _glAccel);
-    }
-#endif
-}
-// ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
 
 } // namespace

@@ -10,7 +10,7 @@
 
 #include <QList>
 
-#include "node_graph.h"
+#include "project.h"
 
 namespace mina {
 
@@ -20,17 +20,11 @@ public:
     explicit CustomTabWidget(QWidget *parent = nullptr);
     ~CustomTabWidget();
 
-    // ---DEPRECATED DUE TO PROJECT MANAGER CLASS---
-    void addDocument(); // TODO: currently empty; adds a document (new project or whatever)
-
 protected:
-    QList<NodeGraphView*> m_graphsInSession;
-
-signals:
-    void graphConfigRefreshRequested(bool _aa, bool _glAccel);
+    QList<Project*> m_openProjects;
 
 public slots:
-    void refreshGraphConfig(bool _aa, bool _glAccel);
+    void addProjectTab(Project *_project);
 };
 
 } // namespace

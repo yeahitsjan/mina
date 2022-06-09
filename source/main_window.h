@@ -58,6 +58,9 @@ private:
 
     QList<QMenu*> m_lMenus;
 
+signals:
+    void activeProjectChange(Project *_project);
+
 public slots:
     void on_editPreferencesAction_clicked();
     void on_activeProject_changed();
