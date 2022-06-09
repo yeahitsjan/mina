@@ -5,6 +5,8 @@
 #include "easylogging++.h"
 #include "read_inode.h"
 
+#include <QFileDialog>
+
 namespace mina {
 
 ReadINode::ReadINode(QObject *parent) : BitmapBNode(parent) {
@@ -14,9 +16,15 @@ ReadINode::~ReadINode() {
 }
 
 void ReadINode::main() {
-    // todo
-    // call loadFromPath by using a QFileDialog
-    LOG(INFO) << "Read inode called";
+    LOG(DEBUG) << "Read inode called";
+    QString _sourceFilePath = QFileDialog::getOpenFileName(
+        nullptr, /* is this even safe? */
+        "Select source file",
+        QDir::currentPath(),
+        "All files (*.*) ;; Bitmap (*.bmp)"
+    );
+    if (!_sourceFilePath.isNull())
+        this->loadFromSourceFile(_sourceFilePath);
     emit mainFinished();
 }
 

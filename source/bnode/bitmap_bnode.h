@@ -20,13 +20,15 @@ public:
     QImage* bitmap();
 
     // Load bitmap from path.
-    bool loadFromPath(const QString &_path);
+    bool loadFromSourceFile(const QString &_path);
+    QString sourceFile();
 
     // todo: load from data (probably input from another node)
 
     int nodeType() override;
 
 protected:
+    QString m_sourceFile;
     QImage *m_bitmap;
 };
 
