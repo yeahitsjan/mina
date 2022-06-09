@@ -13,5 +13,6 @@
         <file>resources/font/OpenSans-SemiBold.ttf</file>
         <file>resources/font/OpenSans-SemiBoldItalic.ttf</file>
         <file>resources/texts/preferences_dlg.ini</file>
+        <file>resources/style/app.qss</file>
     </qresource>
 </RCC>

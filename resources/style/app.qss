@@ -1,0 +1,20 @@
+QMenuBar {
+    border: none;
+    border-bottom: 1px solid rgb(38, 38, 38);
+}
+
+QMenuBar:item {
+    border: none;
+    padding: 7px;
+}
+
+QMenuBar::item:selected {
+    color: rgb(216, 216, 216);
+    background-color: rgba(200, 200, 200, 60);
+}
+
+QMenuBar::item:pressed {
+    color: rgb(216, 216, 216);
+    background-color: rgba(125, 125, 125, 80);
+    color: gray;
+}

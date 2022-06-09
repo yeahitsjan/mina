@@ -10,6 +10,9 @@
 #include <QPalette>
 #include <QColor>
 
+#include <QFile>
+#include <QTextStream>
+
 #include "main_window.h"
 
 MinaApp *MApp { nullptr };
@@ -36,6 +39,15 @@ int main(int argc, char *argv[]) {
     // ---
     p.setColor(QPalette::Highlight, QColor(230, 8, 70));
     mApp.setPalette(p);
+
+    QString _stylesheet;
+    QFile _stylesheetFile(":/resources/style/app.qss");
+    if (_stylesheetFile.open( QIODevice::ReadOnly )) {
+        QTextStream rd(&_stylesheetFile);
+        _stylesheet = rd.readAll();
+        _stylesheetFile.close();
+    }
+    mApp.setStyleSheet(_stylesheet);
 
     mApp.setFont(mApp.platformFont(11));
 
