@@ -4,20 +4,23 @@
 
 #pragma once
 
+#include <QWidget>
 #include <QObject>
-#include <QPointer>
 
+#include <QPointer>
 #include <QString>
+
+#include <QVBoxLayout>
 
 #include "node_graph.h"
 
 namespace mina {
 
-class Project : public QObject {
+class Project : public QWidget {
     Q_OBJECT
 public:
-    Project(QObject *parent = nullptr);
-    Project(const QString &_fromPath, QObject *parent = nullptr);
+    Project(QWidget *parent = nullptr);
+    Project(const QString &_fromPath, QWidget *parent = nullptr);
     ~Project();
 
     // TODO
@@ -35,6 +38,8 @@ protected:
     QPointer<NodeGraphView> m_projectNodeGraph;
 
     void setProjectUniqueId(const QString &_id);
+
+    QVBoxLayout* createGraphUi();
 
 private:
     QString m_mprFilePath;

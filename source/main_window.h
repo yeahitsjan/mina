@@ -23,6 +23,8 @@
 #include "preferences_dialog.h"
 #include "node_graph.h"
 
+#include "project.h"
+
 namespace mina {
 
 class MainWindow : public QMainWindow {
@@ -59,11 +61,12 @@ private:
     QList<QMenu*> m_lMenus;
 
 signals:
-    void activeProjectChange(Project *_project);
+    void newProjectAdded(Project *_project);
 
 public slots:
     void on_editPreferencesAction_clicked();
-    void on_activeProject_changed();
+    void on_Project_added(Project *_project);
+    void on_Project_changed(Project *_project);
 };
 
 } // namespace

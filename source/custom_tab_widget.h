@@ -23,8 +23,12 @@ public:
 protected:
     QList<Project*> m_openProjects;
 
+signals:
+    void projectChanged(Project *_project);
+
 public slots:
     void addProjectTab(Project *_project);
+    void on_Project_changed(int index);
 };
 
 } // namespace

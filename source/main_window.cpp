@@ -45,7 +45,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     if (!m_tabWidget)
         m_tabWidget = new CustomTabWidget;
     this->setCentralWidget(m_tabWidget);
-    connect(this, &MainWindow::activeProjectChange, m_tabWidget, &CustomTabWidget::addProjectTab);
+    connect(this, &MainWindow::newProjectAdded, m_tabWidget, &CustomTabWidget::addProjectTab);
+    connect(m_tabWidget, &CustomTabWidget::projectChanged, this, &MainWindow::on_Project_changed);
 
     if (!m_statusBar)
         m_statusBar = new QStatusBar;
@@ -53,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
 
     if (!m_projectManager)
         m_projectManager = new ProjectManager;
-    connect(m_projectManager, &ProjectManager::activeProjectChanged, this, &MainWindow::on_activeProject_changed);
+    connect(m_projectManager, &ProjectManager::projectAdded, this, &MainWindow::on_Project_added);
 
     if (m_projectManager->projectsInManager().isEmpty()) {
         m_tabWidget->hide();
@@ -86,10 +87,15 @@ void MainWindow::on_editPreferencesAction_clicked() {
     m_preferencesDlg->exec();
 }
 
-void MainWindow::on_activeProject_changed() {
+void MainWindow::on_Project_added(Project *_project) {
     if (!m_tabWidget->isVisible())
         m_tabWidget->show();
-    emit activeProjectChange(m_projectManager->activeProject());
+    emit newProjectAdded(_project);
+}
+
+void MainWindow::on_Project_changed(Project *_project) {
+    // todo: redirect input for 3d/2d view, assets (lib / explorer)
+    LOG(DEBUG) << "Changed to project " + _project->projectUniqueId();
 }
 
 } // namespace

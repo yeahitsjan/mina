@@ -26,13 +26,11 @@ public:
 protected:
     QList<Project*> m_lProjects;
 
-    void setAsActiveProject(Project *_project);
-
 private:
     Project *m_activeProject;
 
 signals:
-    void activeProjectChanged();
+    void projectAdded(Project *_project);
 };
 
 } // namespace

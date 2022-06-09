@@ -14,20 +14,11 @@ ProjectManager::~ProjectManager() {
 
 void ProjectManager::addProject(Project *_project) {
     m_lProjects.append(_project);
-    this->setAsActiveProject(_project);
+    emit projectAdded(_project);
 }
 
 QList<Project*> ProjectManager::projectsInManager() {
     return m_lProjects;
-}
-
-Project* ProjectManager::activeProject() {
-    return m_activeProject;
-}
-
-void ProjectManager::setAsActiveProject(Project *_project) {
-    m_activeProject = _project;
-    emit activeProjectChanged();
 }
 
 } // namespace

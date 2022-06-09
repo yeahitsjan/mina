@@ -14,7 +14,7 @@
 
 namespace mina {
 
-Project::Project(QObject *parent) : QObject(parent) {
+Project::Project(QWidget *parent) : QWidget(parent) {
     // create a new project
     QThread::msleep(6); // more randomness; makes it theoretically impossible to be a duplicate?
     QDate cd = QDate::currentDate();
@@ -22,13 +22,10 @@ Project::Project(QObject *parent) : QObject(parent) {
     QString combination = cd.toString() + "**" + ct.toString("hh:mm:ss.zzz");
     this->setProjectUniqueId( this->textToMd5(combination) );
 
-    if (!m_projectNodeGraph)
-        m_projectNodeGraph = new NodeGraphView;
-    m_projectNodeGraph->setGlAcceleration(MApp->ngConfiguredGLAcceleration());
-    m_projectNodeGraph->setAA(MApp->ngConfiguredAA());
+    this->setLayout( this->createGraphUi() );
 }
 
-Project::Project(const QString &_fromPath, QObject *parent) : m_mprFilePath(_fromPath), QObject(parent) {
+Project::Project(const QString &_fromPath, QWidget *parent) : m_mprFilePath(_fromPath), QWidget(parent) {
     QFileInfo fi(m_mprFilePath);
     if (!fi.exists())
         LOG(ERROR) << "Could not check MPR from path " + m_mprFilePath;
@@ -53,13 +50,25 @@ QString Project::projectUniqueId() {
     return m_projectUniqueId;
 }
 
-NodeGraphView* Project::nodeGraph() {
-    return m_projectNodeGraph;
-}
-
 void Project::setProjectUniqueId(const QString &_id) {
     if (m_projectUniqueId.isEmpty())
         m_projectUniqueId = _id;
+}
+
+QVBoxLayout* Project::createGraphUi() {
+    if (!m_projectNodeGraph)
+        m_projectNodeGraph = new NodeGraphView;
+    m_projectNodeGraph->setGlAcceleration(MApp->ngConfiguredGLAcceleration());
+    m_projectNodeGraph->setAA(MApp->ngConfiguredAA());
+
+    QVBoxLayout *_layout = new QVBoxLayout;
+    _layout->setSpacing(0);
+    _layout->setMargin(0);
+
+    m_projectNodeGraph->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    _layout->addWidget(m_projectNodeGraph);
+
+    return _layout;
 }
 
 QString Project::textToMd5(const QString &_t) {
