@@ -18,3 +18,7 @@ QMenuBar::item:pressed {
     background-color: rgba(125, 125, 125, 80);
     color: gray;
 }
+
+QDockWidget {
+    font: bold;
+}

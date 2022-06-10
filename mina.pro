@@ -14,7 +14,9 @@ SOURCES += source/application.cpp \
             source/bnode/bitmap_bnode.cpp \
             source/inode/read_inode.cpp \
             source/project.cpp \
-            source/project_manager.cpp
+            source/project_manager.cpp \
+            source/view/3d_view.cpp \
+            source/view/2d_view.cpp
 
 HEADERS += source/application.h \
             source/custom_tab_widget.h \
@@ -25,7 +27,9 @@ HEADERS += source/application.h \
             source/bnode/bitmap_bnode.h \
             source/inode/read_inode.h \
             source/project.h \
-            source/project_manager.h
+            source/project_manager.h \
+            source/view/3d_view.h \
+            source/view/2d_view.h
 
 ## Submodules
 include(modules/phantomstyle/src/phantom/phantom.pri)

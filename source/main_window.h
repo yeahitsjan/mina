@@ -20,8 +20,11 @@
 #include "custom_tab_widget.h"
 #include <QStatusBar>
 
+#include <QDockWidget>
+#include "view/3d_view.h"
+#include "view/2d_view.h"
+
 #include "preferences_dialog.h"
-#include "node_graph.h"
 
 #include "project.h"
 
@@ -40,12 +43,16 @@ public:
     QPointer<CustomTabWidget> m_tabWidget;
 
     QPointer<ProjectManager> m_projectManager;
+    QPointer<Q3dView> m_3dView;
+    QPointer<Q2dView> m_2dView;
 
 protected:
     QPointer<QMenuBar> m_menuBar;
     QPointer<QStatusBar> m_statusBar;
 
     QPointer<PreferencesDialog> m_preferencesDlg;
+    QPointer<QDockWidget> m_3dViewDock;
+    QPointer<QDockWidget> m_2dViewDock;
 
 private:
     QMenu *m_fileMenu;

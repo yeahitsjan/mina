@@ -56,8 +56,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
         m_projectManager = new ProjectManager;
     connect(m_projectManager, &ProjectManager::projectAdded, this, &MainWindow::on_Project_added);
 
+    if (!m_3dView)
+        m_3dView = new Q3dView;
+    if (!m_3dViewDock)
+        m_3dViewDock = new QDockWidget;
+    m_3dViewDock->setWidget(m_3dView);
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_3dViewDock);
+
+    if (!m_2dView)
+        m_2dView = new Q2dView;
+    if (!m_2dViewDock)
+        m_2dViewDock = new QDockWidget;
+    m_2dViewDock->setWidget(m_2dView);
+    this->addDockWidget(Qt::BottomDockWidgetArea, m_2dViewDock);
+
     if (m_projectManager->projectsInManager().isEmpty()) {
         m_tabWidget->hide();
+        m_3dViewDock->hide();
     }
 
     // test
@@ -66,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     m_projectManager->addProject(_proj1);
     Project *_proj2 = new Project;
     _proj2->setProjectName("MyCoolMaterial");
-    m_projectManager->addProject(_proj2);
+    //m_projectManager->addProject(_proj2);
 
     this->showStatusBarMsg("OpenGL version " + MApp->currentGpuInfo().openGlVer + " on " + MApp->currentGpuInfo().devName, 10);
 }
@@ -89,12 +104,21 @@ void MainWindow::on_editPreferencesAction_clicked() {
 void MainWindow::on_Project_added(Project *_project) {
     if (!m_tabWidget->isVisible())
         m_tabWidget->show();
+    if (!m_3dViewDock->isVisible())
+        m_3dViewDock->show();
     emit newProjectAdded(_project);
 }
 
 void MainWindow::on_Project_changed(Project *_project) {
     // todo: redirect input for 3d/2d view, assets (lib / explorer)
     LOG(DEBUG) << "Changed to project " + _project->projectUniqueId();
+    if (m_3dViewDock) {
+        m_3dViewDock->setWindowTitle("3D VIEW - [" + _project->projectName() + "]");
+    }
+    if (m_2dViewDock) {
+        m_2dViewDock->setWindowTitle("2D VIEW - [" + _project->projectName() + "]");
+    }
+    // todo: 2d + 3d view needs to get new input
 }
 
 } // namespace
