@@ -32,8 +32,8 @@ HEADERS += source/application.h \
             source/view/2d_view.h
 
 ## Submodules
-include(modules/phantomstyle/src/phantom/phantom.pri)
 include(modules/easyloggingpp/easyloggingpp.pri)
+include(modules/QSimpleUpdater/QSimpleUpdater.pri)
 
 RESOURCES += \
     resources.qrc

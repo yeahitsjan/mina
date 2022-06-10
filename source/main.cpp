@@ -5,8 +5,7 @@
 #include "application.h"
 #include "easylogging++.h"
 
-#include "phantomstyle.h"
-#include <QStyle>
+#include <QStyleFactory>
 #include <QPalette>
 #include <QColor>
 
@@ -23,7 +22,7 @@ INITIALIZE_EASYLOGGINGPP
 int main(int argc, char *argv[]) {
     START_EASYLOGGINGPP(argc, argv);
     MinaApp mApp(argc, argv);
-    mApp.setStyle(new PhantomStyle);
+    mApp.setStyle(QStyleFactory::create("fusion"));
 
     QPalette p;
     // widgets

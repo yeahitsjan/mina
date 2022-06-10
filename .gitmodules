@@ -1,6 +1,6 @@
 [submodule "modules/easyloggingpp"]
 	path = modules/easyloggingpp
 	url = https://github.com/amrayn/easyloggingpp.git
-[submodule "modules/phantomstyle"]
-	path = modules/phantomstyle
-	url = https://github.com/randrew/phantomstyle.git
+[submodule "modules/QSimpleUpdater"]
+	path = modules/QSimpleUpdater
+	url = https://github.com/alex-spataru/QSimpleUpdater.git

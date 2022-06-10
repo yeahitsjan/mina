@@ -1,11 +1,10 @@
 QMenuBar {
     border: none;
-    border-bottom: 1px solid rgb(38, 38, 38);
 }
 
 QMenuBar:item {
     border: none;
-    padding: 7px;
+    padding: 5px;
 }
 
 QMenuBar::item:selected {
