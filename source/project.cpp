@@ -50,6 +50,17 @@ QString Project::projectUniqueId() {
     return m_projectUniqueId;
 }
 
+void Project::refreshGraphConfig(bool _aa, bool _glAccel) {
+    if (m_projectNodeGraph) {
+        m_projectNodeGraph->setAA(_aa);
+        m_projectNodeGraph->setGlAcceleration(_glAccel);
+    }
+}
+
+NodeGraphView* Project::nodeGraph() {
+    return m_projectNodeGraph;
+}
+
 void Project::setProjectUniqueId(const QString &_id) {
     if (m_projectUniqueId.isEmpty())
         m_projectUniqueId = _id;

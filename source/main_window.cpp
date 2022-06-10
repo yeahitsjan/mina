@@ -82,8 +82,7 @@ void MainWindow::showStatusBarMsg(const QString &_msg, int _lengthInSecs) {
 void MainWindow::on_editPreferencesAction_clicked() {
     if (!m_preferencesDlg)
         m_preferencesDlg = new PreferencesDialog(this);
-    // refresh in project manager
-    //connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured, m_tabWidget, &CustomTabWidget::refreshGraphConfig);
+    connect(m_preferencesDlg, &PreferencesDialog::graphReconfigured, m_projectManager, &ProjectManager::on_graphConfig_refreshed);
     m_preferencesDlg->exec();
 }
 

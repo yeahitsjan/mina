@@ -18,10 +18,10 @@ public:
     explicit ProjectManager(QObject *parent = nullptr);
     ~ProjectManager();
 
+    // Add a project to the manager.
     void addProject(Project *_project);
+    // Return all projects of the manager in the current session.
     QList<Project*> projectsInManager();
-
-    Project* activeProject();
 
 protected:
     QList<Project*> m_lProjects;
@@ -31,6 +31,9 @@ private:
 
 signals:
     void projectAdded(Project *_project);
+
+public slots:
+    void on_graphConfig_refreshed(bool _aa, bool _glAccel);
 };
 
 } // namespace
