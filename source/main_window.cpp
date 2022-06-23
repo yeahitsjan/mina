@@ -81,7 +81,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     m_projectManager->addProject(_proj1);
     Project *_proj2 = new Project;
     _proj2->setProjectName("MyCoolMaterial");
-    //m_projectManager->addProject(_proj2);
+    m_projectManager->addProject(_proj2);
 
     this->showStatusBarMsg("OpenGL version " + MApp->currentGpuInfo().openGlVer + " on " + MApp->currentGpuInfo().devName, 10);
 }

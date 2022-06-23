@@ -25,6 +25,14 @@
 
 namespace mina {
 
+class GridBuilder_p {
+public:
+    static QPixmap drawPattern(int _step, const QColor &_col);
+
+private:
+    static void drawSq(QPainter *_painter, int _w, const QColor &_col);
+};
+
 class ControllerRectItem : public QObject, public QGraphicsRectItem {
     Q_OBJECT
 public:

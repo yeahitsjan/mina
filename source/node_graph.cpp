@@ -12,6 +12,24 @@
 
 namespace mina {
 
+QPixmap GridBuilder_p::drawPattern(int _step, const QColor &_col) {
+    QPixmap px(_step, _step);
+    QPainter p;
+    
+    int pxwidth = px.width() - 1;
+    px.fill(QColor(47, 47, 47));
+
+    p.begin(&px);
+    drawSq(&p, pxwidth, _col);
+    return px;
+}
+
+void GridBuilder_p::drawSq(QPainter *_painter, int _w, const QColor &_col) {
+    _painter->setPen(_col);
+    _painter->drawLine(0, 0, _w, 0);
+    _painter->drawLine(0, 0, 0, _w);
+}
+
 void ControllerRectItem::mousePressEvent(QGraphicsSceneMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         QGraphicsItem::mousePressEvent(event);
@@ -33,7 +51,7 @@ NodeGraphView::NodeGraphView(QWidget *parent) : QGraphicsView(parent) {
     connect(this, &NodeGraphView::glAccelerationChanged, this, &NodeGraphView::glAcceleration);
     connect(this, &NodeGraphView::aaModeChanged, this, &NodeGraphView::aaMode);
 
-    this->setBackgroundBrush(QBrush(QColor(38, 38, 38))); // darker so it can be differentiated
+    this->setBackgroundBrush(QBrush(GridBuilder_p::drawPattern(25, QColor(51, 51, 51)))); // darker so it can be differentiated
     this->setScene(new QGraphicsScene(this));
 }
 
@@ -124,7 +142,7 @@ void NodeGraphView::nodeReadyForDisplay(AbstractNode *_node) {
     ControllerRectItem *_proxyController = new ControllerRectItem;
     _proxyController->setRect(QRectF(__tmpPoint.x(), __tmpPoint.y(), _node->graphWidget()->width(), 10));
     _proxyController->setPen(QPen(Qt::gray));
-    _proxyController->setBrush(QBrush(QColor(235, 135, 0))); // TODO: based on node type
+    _proxyController->setBrush(QBrush(QColor(230, 8, 70))); // TODO: based on node type
     _proxyController->setFlag(QGraphicsItem::ItemIsMovable, true);
     _proxyController->setFlag(QGraphicsItem::ItemIsSelectable, true);
     _proxyController->setCursor(Qt::SizeAllCursor);
