@@ -1,18 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/font/OpenSans-Bold.ttf</file>
-        <file>resources/font/OpenSans-BoldItalic.ttf</file>
-        <file>resources/font/OpenSans-ExtraBold.ttf</file>
-        <file>resources/font/OpenSans-ExtraBoldItalic.ttf</file>
-        <file>resources/font/OpenSans-Italic.ttf</file>
-        <file>resources/font/OpenSans-Light.ttf</file>
-        <file>resources/font/OpenSans-LightItalic.ttf</file>
-        <file>resources/font/OpenSans-Medium.ttf</file>
-        <file>resources/font/OpenSans-MediumItalic.ttf</file>
-        <file>resources/font/OpenSans-Regular.ttf</file>
-        <file>resources/font/OpenSans-SemiBold.ttf</file>
-        <file>resources/font/OpenSans-SemiBoldItalic.ttf</file>
         <file>resources/texts/preferences_dlg.ini</file>
         <file>resources/style/app.qss</file>
+        <file>resources/font/Rubik-Black.ttf</file>
+        <file>resources/font/Rubik-BlackItalic.ttf</file>
+        <file>resources/font/Rubik-Bold.ttf</file>
+        <file>resources/font/Rubik-BoldItalic.ttf</file>
+        <file>resources/font/Rubik-ExtraBold.ttf</file>
+        <file>resources/font/Rubik-ExtraBoldItalic.ttf</file>
+        <file>resources/font/Rubik-Italic.ttf</file>
+        <file>resources/font/Rubik-Light.ttf</file>
+        <file>resources/font/Rubik-LightItalic.ttf</file>
+        <file>resources/font/Rubik-Medium.ttf</file>
+        <file>resources/font/Rubik-MediumItalic.ttf</file>
+        <file>resources/font/Rubik-Regular.ttf</file>
+        <file>resources/font/Rubik-SemiBold.ttf</file>
+        <file>resources/font/Rubik-SemiBoldItalic.ttf</file>
     </qresource>
 </RCC>

@@ -26,10 +26,10 @@ int main(int argc, char *argv[]) {
 
     QPalette p;
     // widgets
-    p.setColor(QPalette::Window, QColor(50, 50, 50));
-    p.setColor(QPalette::Base, QColor(50, 50, 50));
-    p.setColor(QPalette::AlternateBase, QColor(50, 50, 50));
-    p.setColor(QPalette::Button, QColor(50, 50, 50));
+    p.setColor(QPalette::Window, QColor(51, 51, 51));
+    p.setColor(QPalette::Base, QColor(51, 51, 51));
+    p.setColor(QPalette::AlternateBase, QColor(51, 51, 51));
+    p.setColor(QPalette::Button, QColor(51, 51, 51));
     // text
     p.setColor(QPalette::WindowText, QColor(198, 198, 198));
     p.setColor(QPalette::Text, QColor(198, 198, 198));

@@ -31,7 +31,7 @@ MinaApp::~MinaApp() {
 QFont MinaApp::platformFont(int _pxSz) {
     QFont font;
     if (m_fontInstalled) {
-        font.setFamily("Open Sans");
+        font.setFamily("Rubik");
     } else {
 #if defined(Q_OS_WIN)
     font.setFamily("Tahoma");
@@ -86,19 +86,19 @@ bool MinaApp::ngConfiguredGLAcceleration() {
 
 bool MinaApp::installApplicationFont() {
     int c;
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-Regular.ttf");
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-Medium.ttf");
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-Bold.ttf");
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-SemiBold.ttf");
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-Light.ttf");
-    c = QFontDatabase::addApplicationFont(":/resources/font/OpenSans-Italic.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-Regular.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-Medium.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-Bold.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-SemiBold.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-Light.ttf");
+    c = QFontDatabase::addApplicationFont(":/resources/font/Rubik-Italic.ttf");
 
     if (c == -1) {
-        LOG(WARNING) << "OpenSans was not added to the font database. Using fallback.";
+        LOG(WARNING) << "Rubik was not added to the font database. Using fallback.";
         return false;
     }
     else {
-        LOG(INFO) << "OpenSans successfully added to font database.";
+        LOG(INFO) << "Rubik successfully added to font database.";
         return true;
     }
     return false;

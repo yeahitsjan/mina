@@ -21,3 +21,7 @@ QMenuBar::item:pressed {
 QDockWidget {
     font: bold;
 }
+
+QToolBar {
+    border: 1px solid rgb(38, 38, 38);
+}

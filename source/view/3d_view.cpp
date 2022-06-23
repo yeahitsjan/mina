@@ -23,7 +23,7 @@ Q3dView::Q3dView(QWidget *parent) : QWidget(parent) {
 
     if (!m_view)
         m_view = new Qt3DExtras::Qt3DWindow;
-    m_view->defaultFrameGraph()->setClearColor(QColor(38, 38, 38));
+    m_view->defaultFrameGraph()->setClearColor(QColor(32, 32, 32));
     if (!m_viewContainer)
         m_viewContainer = QWidget::createWindowContainer(m_view);
     m_viewContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
