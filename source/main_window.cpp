@@ -10,7 +10,7 @@ namespace mina {
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     if (!m_menuBar)
         m_menuBar = new QMenuBar;
-    m_menuBar->setFont(MApp->platformFont(11));
+    m_menuBar->setFont(MApp->platformFont(12));
     this->setMenuBar(m_menuBar);
 
     if (!m_toolsBar)
@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     m_helpMenu->addAction(m_help_aboutAction);
 
     foreach (QMenu *_m, m_lMenus) {
-        _m->setFont(MApp->platformFont(11));
+        _m->setFont(MApp->platformFont(12));
     }
 
     this->setTabPosition(Qt::AllDockWidgetAreas, QTabWidget::North);

@@ -4,7 +4,7 @@ QMenuBar {
 
 QMenuBar:item {
     border: none;
-    padding: 5px;
+    padding: 6px;
 }
 
 QMenuBar::item:selected {
@@ -24,6 +24,7 @@ QDockWidget {
 
 QToolBar {
     border: 1px solid rgb(38, 38, 38);
+    background-color: rgb(51, 51, 51);
 }
 
 QToolBar::handle {
@@ -44,6 +45,24 @@ QTabBar::tab {
 } 
 
 QTabBar::tab:selected { 
-    background: rgb(37, 37, 37); 
+    background: rgb(32, 32, 32); 
     margin-bottom: -1px; 
+}
+
+QPushButton {
+    border-radius: 4px;
+    padding: 7px;
+    color: rgb(216, 216, 216);
+    background-color: rgba(200, 200, 200, 80);
+}
+
+QPushButton:hover {
+    background-color: rgba(225, 225, 225, 80);
+    color: lightgray;
+}
+
+QPushButton:pressed {
+    background-color: rgba(125, 125, 125, 125);
+    border: 1px solid rgb(125, 125, 125);
+    color: rgb(70, 70, 70);
 }

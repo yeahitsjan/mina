@@ -26,10 +26,10 @@ int main(int argc, char *argv[]) {
 
     QPalette p;
     // widgets
-    p.setColor(QPalette::Window, QColor(51, 51, 51));
-    p.setColor(QPalette::Base, QColor(51, 51, 51));
-    p.setColor(QPalette::AlternateBase, QColor(51, 51, 51));
-    p.setColor(QPalette::Button, QColor(51, 51, 51));
+    p.setColor(QPalette::Window, QColor(41, 41, 41));
+    p.setColor(QPalette::Base, QColor(41, 41, 41));
+    p.setColor(QPalette::AlternateBase, QColor(41, 41, 41));
+    p.setColor(QPalette::Button, QColor(41, 41, 41));
     // text
     p.setColor(QPalette::WindowText, QColor(198, 198, 198));
     p.setColor(QPalette::Text, QColor(198, 198, 198));
@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
     }
     mApp.setStyleSheet(_stylesheet);
 
-    mApp.setFont(mApp.platformFont(11));
+    mApp.setFont(mApp.platformFont(12));
 
     MainWindow win;
     win.show();
