@@ -14,6 +14,7 @@ AbstractNodeWidget::AbstractNodeWidget(QWidget *parent) : QWidget(parent) {
     this->setFixedSize(QSize(100, 28));
 
     m_mainBtn = new QPushButton;
+    m_mainBtn->setObjectName("NodePushButton");
     QVBoxLayout *_layout = new QVBoxLayout;
     _layout->setSpacing(0);
     _layout->setMargin(0);

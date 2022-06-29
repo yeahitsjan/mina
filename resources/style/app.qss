@@ -66,3 +66,16 @@ QPushButton:pressed {
     border: 1px solid rgb(125, 125, 125);
     color: rgb(70, 70, 70);
 }
+
+#NodePushButton {
+    border: none;
+    border-radius: 0px;
+    padding: 7px;
+    color: rgb(216, 216, 216);
+    background-color: rgba(200, 200, 200, 80); 
+}
+
+#NodePushButton:hover {
+    background-color: rgba(225, 225, 225, 80);
+    color: lightgray;
+}
