@@ -9,10 +9,14 @@
 #include <QOffscreenSurface>
 #include <QOpenGLFunctions>
 
+#include <QPointer>
+
 #include <QApplication>
 #include <QObject>
 
 #include <QFont>
+
+#include "node_registry.h"
 
 #define MINA_VERSION "0.0v0"
 #define MINA_BDATE "01 June 2022"
@@ -63,6 +67,7 @@ public:
     bool ngConfiguredGLAcceleration();
 
 protected:
+    QPointer<mina::NodeRegistry> m_globalRegistry;
     SysGpuInfo m_gpuInfo;
     
     bool installApplicationFont();

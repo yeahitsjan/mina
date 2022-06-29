@@ -11,12 +11,13 @@ SOURCES += source/application.cpp \
             source/preferences_dialog.cpp \
             source/node_graph.cpp \
             source/abstract_node.cpp \
+            source/node_registry.cpp \
             source/bnode/bitmap_bnode.cpp \
             source/inode/read_inode.cpp \
             source/project.cpp \
             source/project_manager.cpp \
             source/view/3d_view.cpp \
-            source/view/2d_view.cpp
+            source/view/2d_view.cpp \
 
 HEADERS += source/application.h \
             source/custom_tab_widget.h \
@@ -24,6 +25,7 @@ HEADERS += source/application.h \
             source/preferences_dialog.h \
             source/node_graph.h \
             source/abstract_node.h \
+            source/node_registry.h \
             source/bnode/bitmap_bnode.h \
             source/inode/read_inode.h \
             source/project.h \

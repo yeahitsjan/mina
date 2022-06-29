@@ -18,6 +18,12 @@ MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
     LOG(INFO) << "Copyright (c) 2022 Jan Kowalewicz -  Licensed under GNU GPLv3. See LICENSE or visit <https://www.gnu.org/licenses/>.";
     m_gpuInfo = gpuInfo();
 
+    if (!m_globalRegistry)
+        m_globalRegistry = new mina::NodeRegistry;
+    // TODO: load search path from preferences
+    m_globalRegistry->indexResourcePath();
+    m_globalRegistry->indexSearchPath(m_globalRegistry->nodeSearchPath());
+
     // TODO: force for now
     this->ngConfigureAA(false);
     this->ngConfigureGLAcceleration(false);

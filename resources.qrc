@@ -17,4 +17,7 @@
         <file>resources/font/Rubik-SemiBold.ttf</file>
         <file>resources/font/Rubik-SemiBoldItalic.ttf</file>
     </qresource>
+    <qresource prefix="/NODE_REGISTRY">
+        <file>source/inode/INODE_read.json</file>
+    </qresource>
 </RCC>

@@ -1,0 +1,7 @@
+{
+    "name": "Read",
+    "category": "0",
+    "version": "0",
+    "author": "Jan Kowalewicz & Mina authors",
+    "description": "[INode] Read a bitmap from a file"
+}
