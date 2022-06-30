@@ -16,10 +16,10 @@ class NodeRegistry : public QObject {
     Q_OBJECT
 public:
     struct SqlPack {
-        QString uniqueId;
+        QString uniqueid;
         QString name;
         QString category;
-        QString verStr;
+        QString versionstring;
         QString author;
         QString description;
     };
@@ -37,6 +37,12 @@ protected:
 
 private:
     void index(const QString &_path, QStringList &_list);
+    QString generateUniqueId(const QString &_name, const QString &_verStr);
+
+    void clearPack(SqlPack _pack);
+
+    bool existsInRegistry(const QString &_uniqueId);
+    void addToRegistry(SqlPack _pack);
 
 public slots:
     bool initializeLocalDb(); // todo: load a backup?

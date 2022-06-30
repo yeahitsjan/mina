@@ -57,6 +57,7 @@ void MinaApp::prepareHomeDirectory() {
         LOG(DEBUG) << "Initialize nodes db";
         if (m_globalRegistry->initializeLocalDb()) {
             LOG(INFO) << "Prepare phase: Initialized new node registry";
+            emit preparationDone();
         }
     } else {
         LOG(INFO) << "Prepare phase: Found node registry in [~/.mina/n.db]";

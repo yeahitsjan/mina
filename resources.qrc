@@ -19,5 +19,6 @@
     </qresource>
     <qresource prefix="/NODE_REGISTRY">
         <file>source/inode/INODE_read.json</file>
+        <file>source/inode/INODE_solidcolor.json</file>
     </qresource>
 </RCC>

@@ -9,6 +9,8 @@
 #include <QDirIterator>
 #include <QStandardPaths>
 
+#include <QVariant>
+
 #include <QFile>
 #include <QByteArray>
 
@@ -19,6 +21,9 @@
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlError>
+
+#include <QCryptographicHash>
 
 namespace mina {
 
@@ -58,19 +63,76 @@ void NodeRegistry::index(const QString &_path, QStringList &_list) {
     LOG(INFO) << "Finished indexing; Found " + QString::number(_list.count()) + " files";
 }
 
+QString NodeRegistry::generateUniqueId(const QString &_name, const QString &_verStr) {
+    QString identifier = "__NODE__" + _name + "**" + _verStr;
+    QString hash = QString("%1").arg(QString(QCryptographicHash::hash(identifier.toUtf8(), QCryptographicHash::Sha1).toHex()));
+    return hash;
+}
+
+void NodeRegistry::clearPack(SqlPack _pack) {
+    _pack.uniqueid = "";
+    _pack.name = "";
+    _pack.category = "";
+    _pack.versionstring = "";
+    _pack.author = "";
+    _pack.description = "";
+}
+
+bool NodeRegistry::existsInRegistry(const QString &_uniqueId) {
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(dbPath);
+    db.open();
+    QSqlQuery q;
+    q.prepare("SELECT * FROM nodes WHERE uniqueid = :uniqueId");
+    q.bindValue(":uniqueId", QVariant(_uniqueId));
+    if (q.exec()) {
+        bool res = q.next();
+        if (res) {
+            LOG(INFO) << "Node with id " + _uniqueId + " already exists in registry.";
+            return true;
+        } else {
+            return false;
+        }   
+    }
+    db.close();
+}
+
+void NodeRegistry::addToRegistry(SqlPack _pack) {
+    if (!this->existsInRegistry(_pack.uniqueid)) {
+        QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(dbPath);
+        db.open();
+        QSqlQuery q;
+        q.prepare("INSERT INTO nodes (uniqueid, name, category, versionstring, author, description) "
+                                "VALUES (:uniqueid, :name, :category, :versionstring, :author, :description)");
+        q.bindValue(":uniqueid", QVariant(_pack.uniqueid));
+        q.bindValue(":name", QVariant(_pack.name));
+        q.bindValue(":category", QVariant(_pack.category));
+        q.bindValue(":versionstring", QVariant(_pack.versionstring));
+        q.bindValue(":author", QVariant(_pack.author));
+        q.bindValue(":description", QVariant(_pack.description));
+        if (q.exec())
+            LOG(INFO) << "Added node '" + _pack.name + " (" + _pack.uniqueid + ")' to registry.";
+        else
+            LOG(ERROR) << "Could not add node to database. SQLITE_ERR: " + q.lastError().text();
+        db.close();
+    }
+}
+
 bool NodeRegistry::initializeLocalDb() {
     QString path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(path);
     db.open();
     QSqlQuery q;
-    return q.exec("create table nodes "
-                "(id integer primary key, "
-                "uniqueid varchar(200), "
-                "name varchar(60), "
-                "category varchar(10), "
-                "versionstring varchar(40), "
-                "author varchar(60), "
+    return q.exec("CREATE TABLE nodes "
+                "(uniqueid varchar(200), "
+                "name varchar(200), "
+                "category varchar(200), "
+                "versionstring varchar(200), "
+                "author varchar(200), "
                 "description varchar(200))");
 }
 
@@ -92,9 +154,11 @@ void NodeRegistry::fillRegistry(const QStringList &_jsonFiles) {
         return;
     }
 
+    SqlPack p;
+
     foreach (QString _jsonFile, _jsonFiles) {
         bool err = false;
-        //sql!
+        this->clearPack(p);
 
         QFile f(_jsonFile);
         if (!f.open( QIODevice::ReadOnly )) {
@@ -119,9 +183,24 @@ void NodeRegistry::fillRegistry(const QStringList &_jsonFiles) {
             jObj = jDoc.object();
 
             QJsonValue jVal;
-            //todo: parse json into SqlPack, then apply to database if not already there
+
+            jVal = jObj.value("name");
+            p.name = jVal.toString();
+            jVal = jObj.value("category");
+            p.category = jVal.toString();
+            jVal = jObj.value("version");
+            p.versionstring = jVal.toString();
+            jVal = jObj.value("author");
+            p.author = jVal.toString();
+            jVal = jObj.value("description");
+            p.description = jVal.toString();
+
+            p.uniqueid = this->generateUniqueId(p.name, p.versionstring);
+            this->addToRegistry(p);
         }
     }
+    // Clearup.
+    this->clearPack(p);
 }
 
 } // namespace
