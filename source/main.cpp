@@ -50,6 +50,9 @@ int main(int argc, char *argv[]) {
 
     mApp.setFont(mApp.platformFont(12));
 
+    //todo: splashscreen
+    mApp.prepareHomeDirectory();
+
     MainWindow win;
     win.show();
 

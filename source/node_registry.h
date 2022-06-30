@@ -15,6 +15,14 @@ namespace mina {
 class NodeRegistry : public QObject {
     Q_OBJECT
 public:
+    struct SqlPack {
+        QString uniqueId;
+        QString name;
+        QString category;
+        QString verStr;
+        QString author;
+        QString description;
+    };
     explicit NodeRegistry(QObject *parent = nullptr);
     ~NodeRegistry();
 
@@ -31,6 +39,7 @@ private:
     void index(const QString &_path, QStringList &_list);
 
 public slots:
+    bool initializeLocalDb(); // todo: load a backup?
     void indexResourcePath();
     void indexSearchPath(const QString &_searchPath);
     void fillRegistry(const QStringList &_jsonFiles);

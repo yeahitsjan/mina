@@ -17,6 +17,9 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#include <QSqlDatabase>
+#include <QSqlQuery>
+
 namespace mina {
 
 NodeRegistry::NodeRegistry(QObject *parent) : QObject(parent) {
@@ -55,6 +58,22 @@ void NodeRegistry::index(const QString &_path, QStringList &_list) {
     LOG(INFO) << "Finished indexing; Found " + QString::number(_list.count()) + " files";
 }
 
+bool NodeRegistry::initializeLocalDb() {
+    QString path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(path);
+    db.open();
+    QSqlQuery q;
+    return q.exec("create table nodes "
+                "(id integer primary key, "
+                "uniqueid varchar(200), "
+                "name varchar(60), "
+                "category varchar(10), "
+                "versionstring varchar(40), "
+                "author varchar(60), "
+                "description varchar(200))");
+}
+
 void NodeRegistry::indexResourcePath() {
     LOG(INFO) << "Loading INodes from resources";
     this->index(":/NODE_REGISTRY/source/inode/", m_lINodes);
@@ -75,7 +94,7 @@ void NodeRegistry::fillRegistry(const QStringList &_jsonFiles) {
 
     foreach (QString _jsonFile, _jsonFiles) {
         bool err = false;
-        //node?
+        //sql!
 
         QFile f(_jsonFile);
         if (!f.open( QIODevice::ReadOnly )) {
@@ -100,7 +119,7 @@ void NodeRegistry::fillRegistry(const QStringList &_jsonFiles) {
             jObj = jDoc.object();
 
             QJsonValue jVal;
-            //todo: parse json
+            //todo: parse json into SqlPack, then apply to database if not already there
         }
     }
 }

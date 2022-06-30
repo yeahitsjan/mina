@@ -12,6 +12,9 @@
 #include <QFile>
 #include <QTextStream>
 
+#include <QStandardPaths>
+#include <QDir>
+
 MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
     MApp = this;
     LOG(INFO) << "Mina version " << MINA_VERSION << " - build date: " << MINA_BDATE;
@@ -20,9 +23,7 @@ MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
 
     if (!m_globalRegistry)
         m_globalRegistry = new mina::NodeRegistry;
-    // TODO: load search path from preferences
-    m_globalRegistry->indexResourcePath();
-    m_globalRegistry->indexSearchPath(m_globalRegistry->nodeSearchPath());
+    connect(this, &MinaApp::preparationDone, this, &MinaApp::indexNodes);
 
     // TODO: force for now
     this->ngConfigureAA(false);
@@ -32,6 +33,35 @@ MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
 }
 
 MinaApp::~MinaApp() {
+}
+
+void MinaApp::prepareHomeDirectory() {
+    QString sdir = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/";
+    QDir dir(sdir);
+    if (!dir.exists()) {
+        if (dir.mkpath("."))
+            LOG(INFO) << "Prepare phase: Created [~/.mina]";
+        //todo
+    } else {
+        LOG(INFO) << "Prepare phase: Found the main directory";
+    }
+    QDir customNodesDir(sdir + "cnode");
+    if (!customNodesDir.exists()) {
+        if (customNodesDir.mkpath("."))
+            LOG(INFO) << "Prepare phase: Create [~/.mina/cnode]";
+    } else {
+        LOG(INFO) << "Prepare phase: Found custom nodes directory";
+    }
+    QFileInfo dbInf(sdir + "n.db");
+    if (!dbInf.exists()) {
+        LOG(DEBUG) << "Initialize nodes db";
+        if (m_globalRegistry->initializeLocalDb()) {
+            LOG(INFO) << "Prepare phase: Initialized new node registry";
+        }
+    } else {
+        LOG(INFO) << "Prepare phase: Found node registry in [~/.mina/n.db]";
+        emit preparationDone();
+    }
 }
 
 QFont MinaApp::platformFont(int _pxSz) {
@@ -108,4 +138,12 @@ bool MinaApp::installApplicationFont() {
         return true;
     }
     return false;
+}
+
+void MinaApp::indexNodes() {
+    // TODO: load search path from preferences
+    if (m_globalRegistry) {
+        m_globalRegistry->indexResourcePath();
+        m_globalRegistry->indexSearchPath(m_globalRegistry->nodeSearchPath());
+    }
 }

@@ -54,6 +54,9 @@ public:
     MinaApp(int &argc, char **argv);
     ~MinaApp();
 
+    // Run some checks over mina's home dir (~/.mina)
+    void prepareHomeDirectory();
+
     QFont platformFont(int _pxSz);
     QString INIvalueFromKey(const QString &_part, const QString &_key);
 
@@ -77,6 +80,12 @@ private:
 
     bool m_ngAA;
     bool m_ngGLAcceleration;
+
+public slots:
+    void indexNodes();
+
+signals:
+    void preparationDone();
 };
 
 extern MinaApp *MApp;
