@@ -101,8 +101,7 @@ void NodeGraphView::contextMenuEvent(QContextMenuEvent *event) {
 
         m_nodesMenu->addSeparator();
 
-        if (!m_materialNodesMenu)
-            m_materialNodesMenu = new QMenu("Material");
+        m_materialNodesMenu = new QMenu("Material");
         m_nodesMenu->addMenu(m_materialNodesMenu);
     }
 
