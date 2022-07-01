@@ -21,6 +21,9 @@ public:
     Qt3DRender::QMaterial* material() override;
 protected:
     QPointer<Qt3DExtras::QMetalRoughMaterial> m_metalRoughMaterial;
+
+public slots:
+    void onDataChange(int _nodeType, QVariant _data);
 };
 
 } // namespace

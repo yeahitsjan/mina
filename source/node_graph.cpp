@@ -90,11 +90,7 @@ void NodeGraphView::contextMenuEvent(QContextMenuEvent *event) {
         m_nodesMenu = new QMenu;
 
         m_bitmapNodesMenu = new QMenu("Bitmap");
-        m_readINode_Action = m_bitmapNodesMenu->addAction("Read");
-        connect(m_readINode_Action, &QAction::triggered, this, &NodeGraphView::readINodeClicked);
         m_nodesMenu->addMenu(m_bitmapNodesMenu);
-        m_scINode_Action = m_bitmapNodesMenu->addAction("SolidColor");
-        connect(m_scINode_Action, &QAction::triggered, this, &NodeGraphView::scINodeClicked);
 
         if (!m_scriptNodesMenu)
             m_scriptNodesMenu = new QMenu("Script");
@@ -102,6 +98,12 @@ void NodeGraphView::contextMenuEvent(QContextMenuEvent *event) {
         if (!m_pluginNodesMenu)
             m_pluginNodesMenu = new QMenu("Plugin");
         m_nodesMenu->addMenu(m_pluginNodesMenu);
+
+        m_nodesMenu->addSeparator();
+
+        if (!m_materialNodesMenu)
+            m_materialNodesMenu = new QMenu("Material");
+        m_nodesMenu->addMenu(m_materialNodesMenu);
     }
 
     m_nodesMenu->exec(event->globalPos());
@@ -156,14 +158,6 @@ void NodeGraphView::nodeReadyForDisplay(AbstractNode *_node) {
     _proxy->setParentItem(_proxyController);
 
     m_lNodesInGraph.append(_node);
-}
-
-void NodeGraphView::readINodeClicked() {
-    this->addNode(new ReadINode);
-}
-
-void NodeGraphView::scINodeClicked() {
-    this->addNode(new SolidColorINode);
 }
 
 } // namespace

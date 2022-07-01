@@ -69,8 +69,8 @@ protected:
 
     QMenu *m_bitmapNodesMenu;
     // todo: subject to change due to load from registry
-    QAction *m_readINode_Action;
-    QAction *m_scINode_Action;
+
+    QMenu *m_materialNodesMenu;
 
     QList<AbstractNode*> m_lNodesInGraph;
 
@@ -83,10 +83,6 @@ public slots:
     void glAcceleration(bool en);
     void aaMode(bool en);
     void nodeReadyForDisplay(AbstractNode *_node); // fired from AbstractNode::readyForDisplay
-
-    //todo: see above QActions
-    void readINodeClicked();
-    void scINodeClicked();
 };
 
 } // namespace

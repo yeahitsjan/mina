@@ -18,6 +18,7 @@ SOURCES += source/application.cpp \
             source/bnode/bitmap_bnode.cpp \
             source/inode/read_inode.cpp \
             source/inode/solidcolor_inode.cpp \
+            source/inode/normal_inode.cpp \
             source/project.cpp \
             source/project_manager.cpp \
             source/view/3d_view.cpp \
@@ -38,6 +39,7 @@ HEADERS += source/application.h \
             source/bnode/bitmap_bnode.h \
             source/inode/read_inode.h \
             source/inode/solidcolor_inode.h \
+            source/inode/normal_inode.h \
             source/project.h \
             source/project_manager.h \
             source/view/3d_view.h \

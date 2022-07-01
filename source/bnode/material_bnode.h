@@ -21,6 +21,9 @@ public:
 
 protected:
     QVariant m_vProperty;
+
+signals:
+    void dataChanged(int _nodeType, QVariant _data);
 };
 
 } // namespace

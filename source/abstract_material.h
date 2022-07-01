@@ -31,6 +31,9 @@ public:
 protected:
     QList<MaterialBNode*> m_lNodesForMaterial;
     QPointer<Qt3DRender::QMaterial> m_material;
+
+public slots:
+    virtual void onDataChange(int _nodeType, QVariant _data);
 };
 
 } // namespace
