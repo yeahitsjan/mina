@@ -70,9 +70,32 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     m_2dViewDock->setWidget(m_2dView);
     this->addDockWidget(Qt::BottomDockWidgetArea, m_2dViewDock);
 
+    this->setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
+    this->setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+
+    if (!m_explorerView)
+        m_explorerView = new ExplorerView;
+    if (!m_explorerDock)
+        m_explorerDock = new QDockWidget;
+    m_explorerDock->setWidget(m_explorerView);
+    m_explorerDock->setWindowTitle("PROJECT EXPLORER");
+    this->addDockWidget(Qt::LeftDockWidgetArea, m_explorerDock);
+
+    if (!m_libraryView)
+        m_libraryView = new LibraryView;
+    if (!m_libraryDock)
+        m_libraryDock = new QDockWidget;
+    m_libraryDock->setWidget(m_libraryView);
+    m_libraryDock->setWindowTitle("LIBRARY");
+    this->addDockWidget(Qt::LeftDockWidgetArea, m_libraryDock);
+
+
     if (m_projectManager->projectsInManager().isEmpty()) {
         m_tabWidget->hide();
         m_3dViewDock->hide();
+        m_2dViewDock->hide();
+        m_explorerDock->hide();
+        m_libraryDock->hide();
     }
 
     // test
@@ -106,6 +129,12 @@ void MainWindow::on_Project_added(Project *_project) {
         m_tabWidget->show();
     if (!m_3dViewDock->isVisible())
         m_3dViewDock->show();
+    if (!m_2dViewDock->isVisible())
+        m_2dViewDock->show();
+    if (!m_explorerDock->isVisible())
+        m_explorerDock->show();
+    if (!m_libraryDock->isVisible())
+        m_libraryDock->show();
     emit newProjectAdded(_project);
 }
 
@@ -117,6 +146,9 @@ void MainWindow::on_Project_changed(Project *_project) {
     }
     if (m_2dViewDock) {
         m_2dViewDock->setWindowTitle("2D VIEW - [" + _project->projectName() + "]");
+    }
+    if (m_explorerDock) {
+        m_explorerView->setProject(_project);
     }
     // todo: 2d + 3d view needs to get new input
 }

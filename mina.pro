@@ -22,6 +22,8 @@ SOURCES += source/application.cpp \
             source/project_manager.cpp \
             source/view/3d_view.cpp \
             source/view/2d_view.cpp \
+            source/view/explorer_view.cpp \
+            source/view/library_view.cpp
 
 HEADERS += source/application.h \
             source/custom_tab_widget.h \
@@ -39,7 +41,9 @@ HEADERS += source/application.h \
             source/project.h \
             source/project_manager.h \
             source/view/3d_view.h \
-            source/view/2d_view.h
+            source/view/2d_view.h \
+            source/view/explorer_view.h \
+            source/view/library_view.h
 
 ## Submodules
 include(modules/easyloggingpp/easyloggingpp.pri)

@@ -23,6 +23,8 @@
 #include <QDockWidget>
 #include "view/3d_view.h"
 #include "view/2d_view.h"
+#include "view/explorer_view.h"
+#include "view/library_view.h"
 
 #include "preferences_dialog.h"
 
@@ -45,6 +47,8 @@ public:
     QPointer<ProjectManager> m_projectManager;
     QPointer<Q3dView> m_3dView;
     QPointer<Q2dView> m_2dView;
+    QPointer<ExplorerView> m_explorerView;
+    QPointer<LibraryView> m_libraryView;
 
 protected:
     QPointer<QMenuBar> m_menuBar;
@@ -53,6 +57,8 @@ protected:
     QPointer<PreferencesDialog> m_preferencesDlg;
     QPointer<QDockWidget> m_3dViewDock;
     QPointer<QDockWidget> m_2dViewDock;
+    QPointer<QDockWidget> m_explorerDock;
+    QPointer<QDockWidget> m_libraryDock;
 
 private:
     QMenu *m_fileMenu;
