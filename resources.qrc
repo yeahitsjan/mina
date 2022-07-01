@@ -16,6 +16,10 @@
         <file>resources/font/Rubik-Regular.ttf</file>
         <file>resources/font/Rubik-SemiBold.ttf</file>
         <file>resources/font/Rubik-SemiBoldItalic.ttf</file>
+        <file>resources/icons/app/logo_default.svg</file>
+        <file>resources/icons/app/logo_green.svg</file>
+        <file>resources/icons/app/logo_white_transparent.svg</file>
+        <file>resources/icons/app/logo_default_512px.png</file>
     </qresource>
     <qresource prefix="/NODE_REGISTRY">
         <file>source/inode/INODE_read.json</file>

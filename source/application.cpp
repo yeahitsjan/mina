@@ -6,6 +6,7 @@
 
 #include <QtGlobal>
 
+#include <QIcon>
 #include <QFontDatabase>
 
 #include <QFileInfo>
@@ -17,6 +18,7 @@
 
 MinaApp::MinaApp(int &argc, char **argv) : QApplication(argc, argv) {
     MApp = this;
+    this->setWindowIcon(QIcon(":/resources/icons/app/logo_default_512px.png"));
     LOG(INFO) << "Mina version " << MINA_VERSION << " - build date: " << MINA_BDATE;
     LOG(INFO) << "Copyright (c) 2022 Jan Kowalewicz -  Licensed under GNU GPLv3. See LICENSE or visit <https://www.gnu.org/licenses/>.";
     m_gpuInfo = gpuInfo();
