@@ -10,8 +10,11 @@ SOURCES += source/application.cpp \
             source/main_window.cpp \
             source/preferences_dialog.cpp \
             source/node_graph.cpp \
+            source/abstract_material.cpp \
+            source/material/metalrough_material.cpp \
             source/abstract_node.cpp \
             source/node_registry.cpp \
+            source/bnode/material_bnode.cpp \
             source/bnode/bitmap_bnode.cpp \
             source/inode/read_inode.cpp \
             source/inode/solidcolor_inode.cpp \
@@ -25,8 +28,11 @@ HEADERS += source/application.h \
             source/main_window.h \
             source/preferences_dialog.h \
             source/node_graph.h \
+            source/abstract_material.h \
+            source/material/metalrough_material.h \
             source/abstract_node.h \
             source/node_registry.h \
+            source/bnode/material_bnode.h \
             source/bnode/bitmap_bnode.h \
             source/inode/read_inode.h \
             source/inode/solidcolor_inode.h \
