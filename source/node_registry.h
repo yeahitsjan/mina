@@ -29,6 +29,9 @@ public:
     void setNodeSearchPath(const QString &_searchPath);
     QString nodeSearchPath();
 
+    // Return all nodes as QStringList from the registry with given category.
+    QStringList nodesFromCategory(const QString &_category);
+
 protected:
     QString m_searchPath;
 

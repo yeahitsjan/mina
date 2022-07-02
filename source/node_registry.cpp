@@ -51,6 +51,25 @@ QString NodeRegistry::nodeSearchPath() {
     return m_searchPath;
 }
 
+QStringList NodeRegistry::nodesFromCategory(const QString &_category) {
+    QStringList r;
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(dbPath);
+    db.open();
+    QSqlQuery q;
+    q.prepare("SELECT * FROM nodes WHERE category = :cat");
+    q.bindValue(":cat", QVariant(_category));
+    if (q.exec()) {
+        while (q.next()) {
+            QString cc = q.value(0).toString() + ";" + q.value(1).toString();
+            r.append(cc);
+        }
+    }
+    db.close();
+    return r;
+}
+
 void NodeRegistry::index(const QString &_path, QStringList &_list) {
     QDirIterator it(_path, QDirIterator::NoIteratorFlags);
     while (it.hasNext()) {

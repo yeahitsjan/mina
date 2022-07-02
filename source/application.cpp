@@ -67,6 +67,11 @@ void MinaApp::prepareHomeDirectory() {
     }
 }
 
+QStringList MinaApp::nodeEntriesForCategory(const QString &_category) {
+    if (m_globalRegistry)
+        return m_globalRegistry->nodesFromCategory(_category);
+}
+
 QFont MinaApp::platformFont(int _pxSz) {
     QFont font;
     if (m_fontInstalled) {

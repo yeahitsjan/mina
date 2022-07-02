@@ -74,6 +74,9 @@ protected:
 
     QList<AbstractNode*> m_lNodesInGraph;
 
+private:
+    QList<QAction*> entriesFromCategory(const QString &_category);
+
 signals:
     void glAccelerationChanged(bool en);
     void aaModeChanged(bool en);

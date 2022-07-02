@@ -90,22 +90,40 @@ void NodeGraphView::contextMenuEvent(QContextMenuEvent *event) {
         m_nodesMenu = new QMenu;
 
         m_bitmapNodesMenu = new QMenu("Bitmap");
+        m_bitmapNodesMenu->addActions(this->entriesFromCategory("1"));
         m_nodesMenu->addMenu(m_bitmapNodesMenu);
 
         if (!m_scriptNodesMenu)
             m_scriptNodesMenu = new QMenu("Script");
+        m_scriptNodesMenu->addActions(this->entriesFromCategory("2"));
         m_nodesMenu->addMenu(m_scriptNodesMenu);
         if (!m_pluginNodesMenu)
             m_pluginNodesMenu = new QMenu("Plugin");
+        m_pluginNodesMenu->addActions(this->entriesFromCategory("3"));
         m_nodesMenu->addMenu(m_pluginNodesMenu);
 
         m_nodesMenu->addSeparator();
 
         m_materialNodesMenu = new QMenu("Material");
+        m_materialNodesMenu->addActions(this->entriesFromCategory("0"));
         m_nodesMenu->addMenu(m_materialNodesMenu);
     }
 
     m_nodesMenu->exec(event->globalPos());
+}
+
+QList<QAction*> NodeGraphView::entriesFromCategory(const QString &_category) {
+    QList<QAction*> r;
+    QStringList entries = MApp->nodeEntriesForCategory(_category);
+    if (entries.isEmpty())
+        return r;
+    foreach (QString _e, entries) {
+        QAction *_action = new QAction;
+        _action->setText(_e);
+        //todo: assign uniqueid somewhere, probably moving into own class inherting from QAction
+        r.append(_action);
+    }
+    return r;
 }
 
 void NodeGraphView::onGraphReconfigured(bool _aa, bool _glAccel) {

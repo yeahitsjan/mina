@@ -11,6 +11,8 @@
 
 #include <QPointer>
 
+#include <QStringList>
+
 #include <QApplication>
 #include <QObject>
 
@@ -56,6 +58,9 @@ public:
 
     // Run some checks over mina's home dir (~/.mina)
     void prepareHomeDirectory();
+
+    // Forward call of NodeRegistry::nodesFromCategory.
+    QStringList nodeEntriesForCategory(const QString &_category);
 
     QFont platformFont(int _pxSz);
     QString INIvalueFromKey(const QString &_part, const QString &_key);
