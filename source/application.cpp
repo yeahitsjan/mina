@@ -54,6 +54,9 @@ void MinaApp::prepareHomeDirectory() {
     } else {
         LOG(INFO) << "Prepare phase: Found custom nodes directory";
     }
+    // The node registry is the most relevant part of the application. This is indeed
+    // a double check because NodeRegistry's constructor also checks if the database is already
+    // created and creates one if it doesn't exist.
     QFileInfo dbInf(sdir + "n.db");
     if (!dbInf.exists()) {
         LOG(DEBUG) << "Initialize nodes db";

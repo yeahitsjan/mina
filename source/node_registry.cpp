@@ -28,6 +28,20 @@
 namespace mina {
 
 NodeRegistry::NodeRegistry(QObject *parent) : QObject(parent) {
+    m_connection = "QSQLITE";
+    m_dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", m_connection);
+    QFileInfo check(m_dbPath);
+    // We cannot call ::setDatabaseName before because the file is automatically created
+    // if it does not exist.
+    if (!check.exists()) {
+        db.setDatabaseName(m_dbPath);
+        db.open();
+        this->initializeLocalDb();
+    } else {
+        db.setDatabaseName(m_dbPath);
+        db.open();
+    }
     connect(this, &NodeRegistry::indexingFinished, this, &NodeRegistry::fillRegistry);
 }
 
@@ -53,11 +67,8 @@ QString NodeRegistry::nodeSearchPath() {
 
 QStringList NodeRegistry::nodesFromCategory(const QString &_category) {
     QStringList r;
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(dbPath);
-    db.open();
-    QSqlQuery q;
+    QSqlDatabase db = QSqlDatabase::database(m_connection);
+    QSqlQuery q(db);
     q.prepare("SELECT * FROM nodes WHERE category = :cat");
     q.bindValue(":cat", QVariant(_category));
     if (q.exec()) {
@@ -66,7 +77,6 @@ QStringList NodeRegistry::nodesFromCategory(const QString &_category) {
             r.append(cc);
         }
     }
-    db.close();
     return r;
 }
 
@@ -98,11 +108,8 @@ void NodeRegistry::clearPack(SqlPack _pack) {
 }
 
 bool NodeRegistry::existsInRegistry(const QString &_uniqueId) {
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(dbPath);
-    db.open();
-    QSqlQuery q;
+    QSqlDatabase db = QSqlDatabase::database(m_connection);
+    QSqlQuery q(db);
     q.prepare("SELECT * FROM nodes WHERE uniqueid = :uniqueId");
     q.bindValue(":uniqueId", QVariant(_uniqueId));
     if (q.exec()) {
@@ -114,16 +121,12 @@ bool NodeRegistry::existsInRegistry(const QString &_uniqueId) {
             return false;
         }   
     }
-    db.close();
 }
 
 void NodeRegistry::addToRegistry(SqlPack _pack) {
     if (!this->existsInRegistry(_pack.uniqueid)) {
-        QString dbPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName(dbPath);
-        db.open();
-        QSqlQuery q;
+        QSqlDatabase db = QSqlDatabase::database(m_connection);
+        QSqlQuery q(db);
         q.prepare("INSERT INTO nodes (uniqueid, name, category, versionstring, author, description) "
                                 "VALUES (:uniqueid, :name, :category, :versionstring, :author, :description)");
         q.bindValue(":uniqueid", QVariant(_pack.uniqueid));
@@ -136,16 +139,12 @@ void NodeRegistry::addToRegistry(SqlPack _pack) {
             LOG(INFO) << "Added node '" + _pack.name + " (" + _pack.uniqueid + ")' to registry.";
         else
             LOG(ERROR) << "Could not add node to database. SQLITE_ERR: " + q.lastError().text();
-        db.close();
     }
 }
 
 bool NodeRegistry::initializeLocalDb() {
-    QString path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/.mina/n.db";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(path);
-    db.open();
-    QSqlQuery q;
+    QSqlDatabase db = QSqlDatabase::database(m_connection);
+    QSqlQuery q(db);
     return q.exec("CREATE TABLE nodes "
                 "(uniqueid varchar(200), "
                 "name varchar(200), "

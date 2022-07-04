@@ -26,6 +26,7 @@ public:
     explicit NodeRegistry(QObject *parent = nullptr);
     ~NodeRegistry();
 
+    // Set the custom node search path to _searchPath.
     void setNodeSearchPath(const QString &_searchPath);
     QString nodeSearchPath();
 
@@ -33,6 +34,8 @@ public:
     QStringList nodesFromCategory(const QString &_category);
 
 protected:
+    QString m_connection;
+    QString m_dbPath;
     QString m_searchPath;
 
     QStringList m_lINodes;
