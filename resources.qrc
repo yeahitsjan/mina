@@ -25,5 +25,9 @@
         <file>source/inode/INODE_read.json</file>
         <file>source/inode/INODE_solidcolor.json</file>
         <file>source/inode/INODE_normal.json</file>
+        <file>source/inode/INODE_ao.json</file>
+        <file>source/inode/INODE_basecolor.json</file>
+        <file>source/inode/INODE_metalness.json</file>
+        <file>source/inode/INODE_roughness.json</file>
     </qresource>
 </RCC>

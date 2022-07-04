@@ -19,6 +19,10 @@ SOURCES += source/application.cpp \
             source/inode/read_inode.cpp \
             source/inode/solidcolor_inode.cpp \
             source/inode/normal_inode.cpp \
+            source/inode/ao_inode.cpp \
+            source/inode/metalness_inode.cpp \
+            source/inode/roughness_inode.cpp \
+            source/inode/basecolor_inode.cpp \
             source/project.cpp \
             source/project_manager.cpp \
             source/view/3d_view.cpp \
@@ -40,6 +44,10 @@ HEADERS += source/application.h \
             source/inode/read_inode.h \
             source/inode/solidcolor_inode.h \
             source/inode/normal_inode.h \
+            source/inode/ao_inode.h \
+            source/inode/metalness_inode.h \
+            source/inode/roughness_inode.h \
+            source/inode/basecolor_inode.h \
             source/project.h \
             source/project_manager.h \
             source/view/3d_view.h \
